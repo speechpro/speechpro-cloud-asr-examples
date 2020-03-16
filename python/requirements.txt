@@ -1,0 +1,9 @@
+grpcio
+grpcio-tools
+sounddevice
+soundfile==0.10.2
+samplerate
+numpy
+keyboard
+termcolor
+colorama
