@@ -20,9 +20,9 @@ def recognize_wav(model_name, wav_filename):
     # Конфигурируем распознавание на модель model_name
     yield AsrService_pb2.RecognizeRequest(config=AsrService_pb2.RecognitionConfig(
         auth=AsrService_pb2.Auth(
-            client_id='client_id',
-            domain_id='domain_id',
-            api_key='api_key'
+            client_id='kozhedubov@speechpro.com',
+            domain_id='863',
+            api_key='p0b79967B$'
         ),
         model=base_pb2.Model(id=model_name)))
 
