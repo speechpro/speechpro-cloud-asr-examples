@@ -20,9 +20,9 @@ def recognize_wav(model_name, wav_filename):
     # Конфигурируем распознавание на модель model_name
     yield AsrService_pb2.RecognizeRequest(config=AsrService_pb2.RecognitionConfig(
         auth=AsrService_pb2.Auth(
-            client_id='kozhedubov@speechpro.com',
-            domain_id='863',
-            api_key='p0b79967B$'
+            client_id='',
+            domain_id='',
+            api_key=''
         ),
         model=base_pb2.Model(id=model_name)))
 
@@ -45,7 +45,7 @@ def recognize_wav(model_name, wav_filename):
         while wav.tell() < wav.frames:
             wave_data = wav.read(samples_to_read, dtype="int16")
             sound_for_recognition = wave_data
-            
+
             # Запускаем передискрет только, если частота модели и файла не совпадают
             if resampling_ratio != 1.0:
                 resampled_data = resampler.process(
@@ -111,9 +111,21 @@ if __name__ == '__main__':
     # Соединяемся с сервером
     creds = grpc.ssl_channel_credentials()
     channel = grpc.secure_channel('asr.cp.speechpro.com', creds)
-    
+
     # Будем использовать сервис распознавания речи
     speech_recognizer = AsrService_pb2_grpc.SpeechRecognitionStub(channel)
+
+    model_list = speech_recognizer.GetListOfSpeechRecognitionModels(
+        AsrService_pb2.Auth(
+            client_id='',
+            domain_id='',
+            api_key=''
+        ))
+    print("All available speech recognition models:")
+    for model in model_list.models:
+        print(model.id)
+    print('')
+
 
     # Инициализация цвета в консоли
     colorama.init()
