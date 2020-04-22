@@ -20,13 +20,13 @@ def recognize_wav(model_name, wav_filename):
     # Конфигурируем распознавание на модель model_name
     yield AsrService_pb2.RecognizeRequest(config=AsrService_pb2.RecognitionConfig(
         auth=AsrService_pb2.Auth(
-            client_id='',
-            domain_id='',
-            api_key=''
+            client_id=args.client_id,
+            domain_id=args.domain_id,
+            api_key=args.api_key
         ),
         model=base_pb2.Model(id=model_name)))
 
-    model_samplerate = 16000
+    model_samplerate = 8000 if 'ivr' in model_name.lower() else 16000
 
     # Cчитываем wav-файл кусочками по 1 секунде
     with sf.SoundFile(wav_filename, mode='r') as wav:
@@ -106,6 +106,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("model_name", type=str, help="Model ID for recognition")
     parser.add_argument("input", type=str, help="input (directory or file)")
+    parser.add_argument("--client_id", type=str, help="Client ID/username, typically email address")
+    parser.add_argument("--api_key", type=str, help="API access key")
+    parser.add_argument("--domain_id", type=str, help="Domain ID")
     args = parser.parse_args()
 
     # Соединяемся с сервером
@@ -117,9 +120,9 @@ if __name__ == '__main__':
 
     model_list = speech_recognizer.GetListOfSpeechRecognitionModels(
         AsrService_pb2.Auth(
-            client_id='',
-            domain_id='',
-            api_key=''
+            client_id=args.client_id,
+            domain_id=args.domain_id,
+            api_key=args.api_key
         ))
     print("All available speech recognition models:")
     for model in model_list.models:
