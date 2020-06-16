@@ -20,10 +20,11 @@ target_include_directories(GRPCExample
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
 
 target_link_libraries(GRPCExample
+    libprotobuf
     ProtobufGenerated
-    gRPC::grpc++
-    gRPC::grpc
-    gRPC::gpr
+    grpc++
+    grpc
+    gpr
     )
 
 add_custom_command(
@@ -31,3 +32,14 @@ add_custom_command(
     COMMAND ${CMAKE_COMMAND} -E copy
     ${CMAKE_CURRENT_SOURCE_DIR}/../GRPCPem/roots.pem
     $<TARGET_FILE_DIR:GRPCExample>)
+
+if(WIN32)
+add_custom_command(
+    TARGET GRPCExample POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy
+    ${CMAKE_CURRENT_SOURCE_DIR}/../GRPCPem/roots.pem
+    $<TARGET_FILE_DIR:GRPCExample>/../)
+endif()
+
+install(TARGETS GRPCExample DESTINATION bin)
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/../GRPCPem/roots.pem DESTINATION bin)

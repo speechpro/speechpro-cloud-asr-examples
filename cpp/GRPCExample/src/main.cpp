@@ -1,12 +1,6 @@
 #include <iostream>
 #include <fstream>
 #include <grpc++/create_channel.h>
-#include <openssl/asn1.h>
-#include <openssl/bio.h>
-#include <openssl/conf.h>
-#include <openssl/err.h>
-#include <openssl/pem.h>
-#include <openssl/x509.h>
 #include <ares.h>
 
 #include "SpeechRecognizerService.h"
@@ -55,10 +49,6 @@ int main(int argc, char** argv)
 		<< "\nrequested model: " << modelName
 		<< "\nPath to wav file: " << pathToWavFile
 		<< std::endl;
-
-	OpenSSL_add_all_algorithms();
-	ERR_load_crypto_strings();
-	OPENSSL_no_config();
 
 	grpc::SslCredentialsOptions credOpt;
 

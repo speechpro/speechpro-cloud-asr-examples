@@ -18,9 +18,17 @@ set(CMAKE_RELWITHDEBINFO_POSTFIX "RD")
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(protobuf REQUIRED)
-find_package(gRPC CONFIG REQUIRED)
+add_subdirectory(third_party/grpc)
+
+FILE(GLOB_RECURSE third_party "third_party/*")
+SOURCE_GROUP("third_party" FILES ${third_party})
 
 add_subdirectory(proto)
 add_subdirectory(GRPCExample)
+
+add_custom_command(
+	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/roots.pem
+    COMMAND ${CMAKE_COMMAND} -E copy
+    ${CMAKE_CURRENT_SOURCE_DIR}/GRPCPem/roots.pem
+    ${CMAKE_CURRENT_BINARY_DIR})
 
