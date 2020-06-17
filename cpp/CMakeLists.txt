@@ -9,6 +9,20 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
 	add_definitions(-D_WIN32_WINNT=0x0601)
 endif()
 
+set_property(GLOBAL PROPERTY USE_FOLDERS TRUE)
+define_property(
+    TARGET
+    PROPERTY FOLDER
+    INHERITED
+    BRIEF_DOCS "Set the folder name."
+    FULL_DOCS  "Use to organize targets in an IDE."
+)
+
+function(add_subdirectory_with_folder _folder_name _folder)
+    add_subdirectory(${_folder} ${ARGN})
+    set_property(DIRECTORY "${_folder}" PROPERTY FOLDER "${_folder_name}")
+endfunction()
+
 message(STATUS "CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH}")
 
 set(CMAKE_DEBUG_POSTFIX "D")
@@ -18,10 +32,7 @@ set(CMAKE_RELWITHDEBINFO_POSTFIX "RD")
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_subdirectory(third_party/grpc)
-
-FILE(GLOB_RECURSE third_party "third_party/*")
-SOURCE_GROUP("third_party" FILES ${third_party})
+add_subdirectory_with_folder("gRPC" third_party/grpc)
 
 add_subdirectory(proto)
 add_subdirectory(GRPCExample)
