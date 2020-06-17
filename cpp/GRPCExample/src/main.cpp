@@ -19,6 +19,7 @@ public:
 			for (size_t i = 0; i < results.text().words_size(); ++i) {
 				std::cout << results.text().words(i).text() << " ";
 			}
+			std::cout << std::endl;
 		}
 	}
 
