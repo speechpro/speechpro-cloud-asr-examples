@@ -1,12 +1,15 @@
 Данный клиент симулирует подачу аудио на распознавание в режиме реального времени порциями по 200мс.
 
-Перед запуском установите зависимости и сгенерируйте код клиента по .proto файлам. Также необходимо заменить параметры аутентификации в API на реальные. Их можно получить в Личном кабинета Облака ЦРТ ([создать аккаунт](https://cp.speechpro.com)).
+Перед запуском установите зависимости.
 
-```python
-pip install -r "requirements.txt"
+```shell
+pip install -r requirements.txt
+```
 
-python -m grpc_tools.protoc -I./protos --python_out=./src --grpc_python_out=./src ./protos/base.proto
-python -m grpc_tools.protoc -I./protos --python_out=./src --grpc_python_out=./src ./protos/AsrService.proto
+Запустите программу распознавание речи из файла. Необходимо заменить параметры аутентификации в API на реальные. Их можно получить в Личном кабинета Облака ЦРТ ([создать аккаунт](https://cp.speechpro.com))
+
+```shell
+python src/WavRecognition.py FarFieldRusOnline7 //path_to_audio_file --client_id john@doe.com --domain_id 100 --api_key XYZ
 ```
 
 ### Ресурсы
