@@ -1,6 +1,5 @@
 pushd %~dp0
 :: Install requirements
-REM python -m pip install --proxy proxy2.stc:3128 -r "requirements.txt"
 python -m pip install -r "requirements.txt"
 
 :: Generate python code from proto files
