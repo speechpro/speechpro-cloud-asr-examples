@@ -26,7 +26,7 @@ def recognize_wav(model_name, wav_filename):
         ),
         model=base_pb2.Model(id=model_name)))
 
-    model_samplerate = 8000 if 'ivr' in model_name.lower() else 16000
+    model_samplerate = 8000 if 'phone_call' in model_name.lower() or 'ivr' in model_name.lower() else 16000
 
     # Cчитываем wav-файл кусочками по 1 секунде
     with sf.SoundFile(wav_filename, mode='r') as wav:
