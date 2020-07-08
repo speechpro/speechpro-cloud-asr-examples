@@ -166,3 +166,6 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+
+result.txt
+recorded.wav
