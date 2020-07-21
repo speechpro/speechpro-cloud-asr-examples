@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeechproCloud.AsrGrpcClient", "SpeechproCloud.AsrGrpcClient\SpeechproCloud.AsrGrpcClient.csproj", "{74048C2A-B9A5-440E-ABA8-B417657732C8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeechproCloud.AsrGrpcClient.Microphone", "SpeechproCloud.AsrGrpcClient.Microphone\SpeechproCloud.AsrGrpcClient.Microphone.csproj", "{637C1781-7EE2-4657-86E1-1E776262616B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,17 @@ Global
 		{74048C2A-B9A5-440E-ABA8-B417657732C8}.Release|x64.Build.0 = Release|Any CPU
 		{74048C2A-B9A5-440E-ABA8-B417657732C8}.Release|x86.ActiveCfg = Release|Any CPU
 		{74048C2A-B9A5-440E-ABA8-B417657732C8}.Release|x86.Build.0 = Release|Any CPU
+		{637C1781-7EE2-4657-86E1-1E776262616B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{637C1781-7EE2-4657-86E1-1E776262616B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{637C1781-7EE2-4657-86E1-1E776262616B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{637C1781-7EE2-4657-86E1-1E776262616B}.Debug|x64.Build.0 = Debug|Any CPU
+		{637C1781-7EE2-4657-86E1-1E776262616B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{637C1781-7EE2-4657-86E1-1E776262616B}.Debug|x86.Build.0 = Debug|Any CPU
+		{637C1781-7EE2-4657-86E1-1E776262616B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{637C1781-7EE2-4657-86E1-1E776262616B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{637C1781-7EE2-4657-86E1-1E776262616B}.Release|x64.ActiveCfg = Release|Any CPU
+		{637C1781-7EE2-4657-86E1-1E776262616B}.Release|x64.Build.0 = Release|Any CPU
+		{637C1781-7EE2-4657-86E1-1E776262616B}.Release|x86.ActiveCfg = Release|Any CPU
+		{637C1781-7EE2-4657-86E1-1E776262616B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
