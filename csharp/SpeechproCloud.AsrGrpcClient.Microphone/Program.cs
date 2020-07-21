@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
@@ -14,11 +13,6 @@ namespace SpeechproCloud.AsrGrpcClient.Microphone
 {
     class Program
     {
-        private static void Recorder_DataAvailable(object sender, WaveInEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         private static async Task RecognizeRequest(
             SpeechRecognition.SpeechRecognitionClient client, string model, string client_id, string domain_id, string api_key)
         {
@@ -37,53 +31,46 @@ namespace SpeechproCloud.AsrGrpcClient.Microphone
             recorder.WaveFormat = new WaveFormat(16000, 1);
             recorder.BufferMilliseconds = 200;
 
-            Console.WriteLine("Press ESC to stop");
-
-            while (!(Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Escape))
+            try
             {
-                try
-                {
 
-                    var config = new RecognizeRequest
+                var config = new RecognizeRequest
+                {
+                    Config = new RecognitionConfig
                     {
-                        Config = new RecognitionConfig
-                        {
-                            Model = new Model { Id = model },
-                            Auth = new Auth
-                            {
-                                ClientId = client_id,
-                                DomainId = domain_id,
-                                ApiKey = api_key
-                            }
-                        }
-                    };
-                    await call.RequestStream.WriteAsync(config);
+                        Model = new Model { Id = model },
+                        Auth = new Auth { ClientId = client_id, DomainId = domain_id, ApiKey = api_key }
+                    }
+                };
+                await call.RequestStream.WriteAsync(config);
 
-
-                    recorder.DataAvailable += async (object sender, WaveInEventArgs e) =>
+                recorder.DataAvailable += async (object sender, WaveInEventArgs e) =>
+                {
+                    await call.RequestStream.WriteAsync(new RecognizeRequest
                     {
-                        await call.RequestStream.WriteAsync(new RecognizeRequest
-                        {
-                            Sound = new Sound { Samples = Google.Protobuf.ByteString.CopyFrom(e.Buffer) }
-                        });
-                    };
-                    recorder.StartRecording();
+                        Sound = new Sound { Samples = Google.Protobuf.ByteString.CopyFrom(e.Buffer) }
+                    });
+                };
+                recorder.StartRecording();
+                Console.WriteLine("Started  recording. Press ESC to stop...");
 
+                while(!(Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Escape)) {
+                    Thread.Sleep(100);
                 }
-                catch (Exception)
-                {
-                    throw;
-                }
-                finally
-                {
-                    recorder.StopRecording();
-                    await call.RequestStream.WriteAsync(new RecognizeRequest { Finish = new Finish() });
 
-                    await call.RequestStream.CompleteAsync();
-
-                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                Console.WriteLine("Stopping recording...");
+                recorder.StopRecording();
+                await call.RequestStream.WriteAsync(new RecognizeRequest { Finish = new Finish() });
             }
 
+            await call.RequestStream.CompleteAsync();
             await responseTask;
             }
 
