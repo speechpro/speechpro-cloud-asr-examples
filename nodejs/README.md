@@ -20,6 +20,8 @@ node file.js {path_to_audio_file}
 ```
 
 ### Запуск распознавания из файла с симуляцией реального времени
+> Требуется arecord или sox для пакета mic (https://www.npmjs.com/package/mic)
+
 Звук с микрофона по умолчанию подается на распознавание в режиме реального времени.
 ```shell
 node microphone.js
