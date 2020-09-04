@@ -113,7 +113,7 @@ if __name__ == '__main__':
 
     # Соединяемся с сервером
     creds = grpc.ssl_channel_credentials()
-    channel = grpc.insecure_channel('localhost:5000')
+    channel = grpc.secure_channel('asr.cp.speechpro.com', creds)
 
     # Будем использовать сервис распознавания речи
     speech_recognizer = AsrService_pb2_grpc.SpeechRecognitionStub(channel)
