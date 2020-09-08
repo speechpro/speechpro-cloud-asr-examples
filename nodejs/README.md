@@ -29,7 +29,14 @@ node file.js {path_to_audio_file}
 node microphone.js
 ```
 
+### Модели распознавания
+
+|Модель|Описание|
+|---|---|
+|general|базовая модель для русского языка, работающая в реальном времени|
+|general:rc|Release Candidate модели обновления general|
+
 ### Ресурсы
 [Документация API распознавания речи](https://asr.cp.speechpro.com/docs)
 
-[Зарегистрироваться в Облаке ЦРТ](https://cp.speechpro.com/home)
+[Начать работу в ЦРТ Облаке](https://cp.speechpro.com/home)
