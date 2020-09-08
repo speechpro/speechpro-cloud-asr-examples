@@ -1,3 +1,5 @@
+> :warning: gRPC API распознавания речи находится в стадии **Beta** и не рекомендуется для промышленного использования
+
 gRPC клиент Speechpro Cloud ASR на языке C#. Предполагает наличие .NET Core 3.1 и использования C# 8.0.
 
 ### Распознавание с микрофона
@@ -26,4 +28,3 @@ dotnet run -p SpeechproCloud.AsrGrpcClient Sound/pepsi16kHz.wav general
 [Документация API распознавания речи](https://asr.cp.speechpro.com/docs)
 
 [Зарегистрироваться в Облаке ЦРТ](https://cp.speechpro.com)
-
